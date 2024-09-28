@@ -53,22 +53,8 @@ public class PlayerController : MonoBehaviour
             (int, int, string, int) a = MathGen.GenerateNew(); // result 1, result 2, operation text, wrong answer
             _pro1.text = a.Item1.ToString();
             _pro2.text = a.Item2.ToString();
-            if (a.Item1 == a.Item4) GameObject.Find("Secenek1").tag = "Wrong";
-            else if (a.Item2 == a.Item4) GameObject.Find("Secenek2").tag = "Wrong";
-            if (GameObject.Find("Secenek1").CompareTag("Wrong"))
-            {
-                GameObject.Find("Secenek1").TryGetComponent(typeof(BoxCollider), out Component component1);
-                ((BoxCollider)component1).enabled = true;
-                GameObject.Find("Secenek2").TryGetComponent(typeof(BoxCollider), out Component component);
-                ((BoxCollider)component).enabled = false;
-            }
-            else
-            {
-                GameObject.Find("Secenek1").TryGetComponent(typeof(BoxCollider), out Component component1);
-                ((BoxCollider)component1).enabled = false;
-                GameObject.Find("Secenek2").TryGetComponent(typeof(BoxCollider), out Component component);
-                ((BoxCollider)component).enabled = true;
-            }
+            GameObject.Find("Secenek1").tag = a.Item1 == a.Item4 ? "Wrong" : "Untagged";
+            GameObject.Find("Secenek2").tag = a.Item2 == a.Item4 ? "Wrong" : "Untagged";
             _pro3.text = a.Item3;
         }
     }
@@ -93,22 +79,8 @@ public class PlayerController : MonoBehaviour
         (int, int, string, int) a = MathGen.GenerateNew(); // result 1, result 2, operation text, wrong answer
         _pro1.text = a.Item1.ToString();
         _pro2.text = a.Item2.ToString();
-        if (a.Item1 == a.Item4) GameObject.Find("Secenek1").tag = "Wrong";
-        else if (a.Item2 == a.Item4) GameObject.Find("Secenek2").tag = "Wrong";
-        if (GameObject.Find("Secenek1").CompareTag("Wrong"))
-        {
-            GameObject.Find("Secenek1").TryGetComponent(typeof(BoxCollider), out Component component1);
-            ((BoxCollider)component1).enabled = false;
-            GameObject.Find("Secenek2").TryGetComponent(typeof(BoxCollider), out Component component);
-            ((BoxCollider)component).enabled = true;
-        }
-        else
-        {
-            GameObject.Find("Secenek1").TryGetComponent(typeof(BoxCollider), out Component component1);
-            ((BoxCollider)component1).enabled = true;
-            GameObject.Find("Secenek2").TryGetComponent(typeof(BoxCollider), out Component component);
-            ((BoxCollider)component).enabled = false;
-        }
+        GameObject.Find("Secenek1").tag = a.Item1 == a.Item4 ? "Wrong" : "Untagged";
+        GameObject.Find("Secenek2").tag = a.Item2 == a.Item4 ? "Wrong" : "Untagged";
         _pro3.text = a.Item3;
     }
 
