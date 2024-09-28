@@ -84,10 +84,9 @@ public class PlayerController : MonoBehaviour
         _pro3.text = a.Item3;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ForceMove(string code)
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (code.ToLower() == "a")
         {
             if (currentState == Pos.Left) 
             {
@@ -103,7 +102,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         
-        if (Input.GetKeyDown(KeyCode.D))
+        if (code.ToLower() == "d")
         {
             if (currentState == Pos.Right) 
             {
@@ -118,7 +117,19 @@ public class PlayerController : MonoBehaviour
                 currentState = Pos.Middle;
             }
         }
+    }
 
+    public void Quit()
+    {
+        Application.Quit(0);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.A)) ForceMove("a");
+        if (Input.GetKeyDown(KeyCode.D)) ForceMove("d");
+        
         transform.position = new Vector3(transform.position.x, transform.position.y, EnumToPos[currentState]);
     }
 }
