@@ -8,10 +8,10 @@ public class MathGen : MonoBehaviour
 {
     public static (int, int, string, int) GenerateNew()
     {
-        start:
         float rand = Random.Range(1, 5);
-        int rand1 = Random.Range(1, 65);
-        int rand2 = Random.Range(1, 65);
+        start:
+        int rand1 = Random.Range(2, 33);
+        int rand2 = Random.Range(2, 33);
         int otherChoice = Random.Range(1, 129);
         int outputSlot = Random.Range(1, 3);
         
@@ -45,6 +45,7 @@ public class MathGen : MonoBehaviour
                 int blablablabla = Random.Range(1, 3);
                 if (blablablabla == 1) otherChoice = PowerOfTwo(rand1 + 1);
                 else otherChoice = (int)Mathf.Pow(rand1, 3);
+                if (Mathf.Approximately(otherChoice, output4)) goto start;
                 if (outputSlot == 1) return (output4, otherChoice, "%num1% üzeri 2".Replace("%num1%", rand1.ToString()), otherChoice);
                 return (otherChoice, output4, "%num1% üzeri 2".Replace("%num1%", rand1.ToString()), otherChoice);
         }

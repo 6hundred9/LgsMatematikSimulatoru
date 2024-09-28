@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
     private TextMeshPro _pro1;
     private TextMeshPro _pro2;
     private Text _pro3;
+    private Text _pro4;
+
+    private int _points;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -38,6 +41,7 @@ public class PlayerController : MonoBehaviour
             {
                 _rb.maxLinearVelocity++; 
                 _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
+                _points++;
             }
         }
 
@@ -45,6 +49,7 @@ public class PlayerController : MonoBehaviour
         {
             _rb.maxLinearVelocity = 3;
             _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
+            _points = 0;
         }
 
         if (other.gameObject == _finish || other.gameObject.CompareTag("Wrong"))
@@ -56,6 +61,8 @@ public class PlayerController : MonoBehaviour
             GameObject.Find("Secenek1").tag = a.Item1 == a.Item4 ? "Wrong" : "Untagged";
             GameObject.Find("Secenek2").tag = a.Item2 == a.Item4 ? "Wrong" : "Untagged";
             _pro3.text = a.Item3;
+            currentState = Pos.Middle;
+            _pro4.text = $"{_points} puan";
         }
     }
 
@@ -73,6 +80,7 @@ public class PlayerController : MonoBehaviour
         _pro1 = _gm1.GetComponent<TextMeshPro>();
         _pro2 = _gm2.GetComponent<TextMeshPro>();
         _pro3 = GameObject.FindGameObjectWithTag("3").GetComponent<Text>();
+        _pro4 = GameObject.Find("points").GetComponent<Text>();
         
         _rb.maxLinearVelocity = 3;
         
@@ -82,6 +90,8 @@ public class PlayerController : MonoBehaviour
         GameObject.Find("Secenek1").tag = a.Item1 == a.Item4 ? "Wrong" : "Untagged";
         GameObject.Find("Secenek2").tag = a.Item2 == a.Item4 ? "Wrong" : "Untagged";
         _pro3.text = a.Item3;
+        
+        _pro4.text = $"{_points} puan";
     }
 
     public void ForceMove(string code)
@@ -121,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     public void Quit()
     {
-        Application.Quit(0);
+        Application.Quit();
     }
 
     // Update is called once per frame
