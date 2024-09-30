@@ -41,8 +41,8 @@ public class PlayerController : MonoBehaviour
             {
                 _rb.maxLinearVelocity++; 
                 _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
-                _points++;
             }
+            _points++;
         }
 
         if (other.gameObject.CompareTag("Wrong"))
