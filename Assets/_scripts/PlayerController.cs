@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _scripts;
 using _scripts.Enums;
 using TMPro;
 using UnityEngine;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject == _finish)
         {
-            if (_rb.maxLinearVelocity <= 10)
+            if (_rb.maxLinearVelocity <= 22)
             {
                 _rb.maxLinearVelocity++; 
                 _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
