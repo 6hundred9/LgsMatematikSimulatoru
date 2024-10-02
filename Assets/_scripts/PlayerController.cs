@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.gameObject == _finish)
         {
-            if (_rb.maxLinearVelocity <= 22)
+            if (_rb.maxLinearVelocity <= 25)
             {
                 _rb.maxLinearVelocity++; 
                 _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.gameObject.CompareTag("Wrong"))
         {
-            _rb.maxLinearVelocity = 3;
+            _rb.maxLinearVelocity = 7;
             _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
             _points = 0;
         }
@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour
         _gm2 = GameObject.FindGameObjectWithTag("2");
         _pro1 = _gm1.GetComponent<TextMeshPro>();
         _pro2 = _gm2.GetComponent<TextMeshPro>();
-        _pro3 = GameObject.FindGameObjectWithTag("3").GetComponent<Text>();
+        _pro3 = GameObject.Find("question").GetComponent<Text>();
         _pro4 = GameObject.Find("points").GetComponent<Text>();
         
-        _rb.maxLinearVelocity = 3;
+        _rb.maxLinearVelocity = 7;
         
         (int, int, string, int) a = MathGen.GenerateNew(); // result 1, result 2, operation text, wrong answer
         _pro1.text = a.Item1.ToString();
