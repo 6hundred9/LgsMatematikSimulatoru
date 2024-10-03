@@ -32,7 +32,14 @@ public class PlayerController : MonoBehaviour
     private Text _pro3;
     private Text _pro4;
 
+    private GameObject _game;
+    private GameObject _gameOver;
+
     private int _points;
+
+    private bool _gamePaused;
+
+    float _lastVelocity;
 
     private void OnCollisionEnter(Collision other)
     {
@@ -51,6 +58,7 @@ public class PlayerController : MonoBehaviour
             _rb.maxLinearVelocity = 10;
             _cf.force = new(-_rb.maxLinearVelocity, 0, 0);
             _points = 0;
+            Pause();
         }
 
         if (other.gameObject == _finish || other.gameObject.CompareTag("Wrong"))
@@ -82,6 +90,11 @@ public class PlayerController : MonoBehaviour
         _pro2 = _gm2.GetComponent<TextMeshPro>();
         _pro3 = GameObject.Find("question").GetComponent<Text>();
         _pro4 = GameObject.Find("points").GetComponent<Text>();
+
+        _game = GameObject.Find("Game");
+        _gameOver = GameObject.Find("GameOver");
+
+        _gameOver.SetActive(false);
         
         _rb.maxLinearVelocity = 10;
         
@@ -133,6 +146,29 @@ public class PlayerController : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
+    }
+
+    public void Pause()
+    {
+        if (_gamePaused) return;
+        
+        _lastVelocity = _rb.maxLinearVelocity;
+        _rb.maxLinearVelocity = 0;
+        _game.SetActive(false);
+        _gameOver.SetActive(true);
+        
+        _gamePaused = true;
+    }
+
+    public void Unpause()
+    {
+        if (!_gamePaused) return;
+        
+        _rb.maxLinearVelocity = _lastVelocity;
+        _game.SetActive(true);
+        _gameOver.SetActive(false);
+        
+        _gamePaused = false;
     }
 
     // Update is called once per frame

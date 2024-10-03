@@ -16,7 +16,7 @@ namespace _scripts
         private bool _canPlay = true;
 
         // Set your fallback URL here
-        private string fallbackSongUrl = "https://6hundred9.github.io/songs/Original%20Tetris%20theme%20(Tetris%20Soundtrack)%20(320kbps).wav";
+        private string _fallbackSongUrl = "https://6hundred9.github.io/songs/Original%20Tetris%20theme%20(Tetris%20Soundtrack)%20(320kbps).wav";
 
         void Start()
         {
@@ -33,7 +33,7 @@ namespace _scripts
             if (_paths.Length < 1)
             {
                 Debug.LogWarning("No songs found in the Songs folder. Fetching song from URL.");
-                StartCoroutine(DownloadAudioFromUrl(fallbackSongUrl));
+                StartCoroutine(DownloadAudioFromUrl(_fallbackSongUrl));
             }
         }
 
