@@ -1,3 +1,4 @@
+using Unity.Burst;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,6 +6,7 @@ namespace _scripts
 {
     public class MathGen : MonoBehaviour
     {
+        [BurstCompile]
         public static (int, int, string, int) GenerateNew()
         {
             int rand1 = Random.Range(0, 23);
@@ -60,6 +62,7 @@ namespace _scripts
             return result;
         }
 
+        [BurstCompile]
         public static int Pow(int a, int b)
         {
             return (int)Mathf.Pow(a, b);

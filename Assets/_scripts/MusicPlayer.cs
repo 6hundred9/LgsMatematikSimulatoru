@@ -1,5 +1,6 @@
 using System.Collections;
 using System.IO;
+using Unity.Burst;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -18,6 +19,7 @@ namespace _scripts
         // Set your fallback URL here
         private string _fallbackSongUrl = "https://6hundred9.github.io/songs/Original%20Tetris%20theme%20(Tetris%20Soundtrack)%20(320kbps).wav";
 
+        [BurstCompile]
         void Start()
         {
             _as = GetComponent<AudioSource>();
@@ -37,6 +39,7 @@ namespace _scripts
             }
         }
 
+        [BurstCompile]
         void Update()
         {
             if (_paths.Length < 1) return;
@@ -47,6 +50,7 @@ namespace _scripts
             }
         }
 
+        [BurstCompile]
         public void ToggleSong()
         {
             _canPlay = !_canPlay;
@@ -55,6 +59,7 @@ namespace _scripts
             else _as.UnPause();
         }
 
+        [BurstCompile]
         IEnumerator LoadAudio(string filePath)
         {
             using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip("file:///" + filePath, AudioType.WAV))
@@ -78,6 +83,7 @@ namespace _scripts
             _choosing = false;
         }
 
+        [BurstCompile]
         IEnumerator DownloadAudioFromUrl(string url)
         {
             using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.WAV))

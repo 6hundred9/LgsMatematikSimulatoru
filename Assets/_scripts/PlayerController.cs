@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using _scripts;
 using _scripts.Enums;
 using TMPro;
+using Unity.Burst;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
 
     float _lastVelocity;
 
+    [BurstCompile]
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject == _finish)
@@ -75,6 +77,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    [BurstCompile]
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +111,7 @@ public class PlayerController : MonoBehaviour
         _pro4.text = $"{_points} puan";
     }
 
+    [BurstCompile]
     public void ForceMove(string code)
     {
         if (code.ToLower() == "a")
@@ -148,6 +152,7 @@ public class PlayerController : MonoBehaviour
         Application.Quit();
     }
 
+    [BurstCompile]
     public void Pause()
     {
         if (_gamePaused) return;
@@ -160,6 +165,7 @@ public class PlayerController : MonoBehaviour
         _gamePaused = true;
     }
 
+    [BurstCompile]
     public void Unpause()
     {
         if (!_gamePaused) return;
@@ -169,9 +175,12 @@ public class PlayerController : MonoBehaviour
         _gameOver.SetActive(false);
         
         _gamePaused = false;
+
+        Mathf.Sqrt(5);
     }
 
     // Update is called once per frame
+    [BurstCompile]
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.A)) ForceMove("a");
